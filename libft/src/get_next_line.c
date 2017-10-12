@@ -110,5 +110,6 @@ int				get_next_line(const int fd, char **line)
 		ft_strdel(&node->str);
 		return (1);
 	}
+	ft_strdel(&buf);
 	return (ch_read);
 }

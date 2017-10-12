@@ -25,11 +25,9 @@ void	signal_handler(int signal)
 
 void	signal_handler_input(int signal)
 {
-	if (signal == SIGINT)
+	if (signal == SIGINT || signal == SIGQUIT)
 	{
 		ft_putchar('\n');
 		ft_putstr("minishell$> ");
 	}
-	if (signal == SIGQUIT)
-		exit(0);
 }

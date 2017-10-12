@@ -17,7 +17,7 @@
 
 extern pid_t	g_child_pid;
 
-int		check_exec(char *exec_path)
+static int		check_exec(char *exec_path)
 {
 	struct stat	exec_stat;
 
@@ -36,9 +36,9 @@ int		check_exec(char *exec_path)
 	return (0);
 }
 
-int		run_child_process(char *exec_path, char **args, char **env)
+static int		run_child_process(char *exec_path, char **args, char **env)
 {
-	int		status;
+	int			status;
 
 	status = check_exec(exec_path);
 	if (status)
@@ -52,13 +52,13 @@ int		run_child_process(char *exec_path, char **args, char **env)
 	return (status);
 }
 
-int		exec_cmd(char **args, char **env)
+int				exec_cmd(char **args, char **env)
 {
-	char	**paths;
-	char	*paths_val;
-	char	*full_path;
-	int		status;
-	int		i;
+	char		**paths;
+	char		*paths_val;
+	char		*full_path;
+	int			status;
+	int			i;
 
 	i = 0;
 	status = 0;

@@ -12,10 +12,8 @@
 
 #include "../libft/includes/libft.h"
 #include "../includes/minishell.h"
-//!!!!!!!!!!!!!
-#include <stdio.h>
 
-int		join_var(char **res, char *ch_pos, char **env)
+static int	join_var(char **res, char *ch_pos, char **env)
 {
 	char	*var_name;
 	char	*val;
@@ -42,7 +40,7 @@ int		join_var(char **res, char *ch_pos, char **env)
 	return (i);
 }
 
-char	*process_arg(char *str, char **env)
+static char	*process_arg(char *str, char **env)
 {
 	char	*ch_pos;
 	char	*ptr;
@@ -79,10 +77,6 @@ char	**process_args(char *line, char **env)
 	int		i;
 
 	args = ft_strsplitspaceswithquotes(line);
-	// printf("=============================\n");
-	// printf("args before process:\n");
-	// ft_arrprint(args);
-	// printf("=============================\n");
 	i = 0;
 	while (args[i] && ft_strlen(args[i]) > 0)
 	{

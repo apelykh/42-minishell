@@ -14,7 +14,7 @@
 #include "../includes/minishell.h"
 #include <unistd.h>
 
-char	*append_homepath(char *path, char **env)
+static char	*append_homepath(char *path, char **env)
 {
 	char	*homedir;
 	char	*upd_path;
@@ -27,7 +27,7 @@ char	*append_homepath(char *path, char **env)
 	return (upd_path);
 }
 
-int		change_wd(char *path, char ***env)
+static int	change_wd(char *path, char ***env)
 {
 	char	*cur_wd;
 	char	*old_wd;

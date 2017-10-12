@@ -43,14 +43,11 @@ char	**ft_unsetenv(char **args, char ***env);
 /*
 ** src/exec_utils.c
 */
-int		check_exec(char *exec_path);
-int		run_child_process(char *exec_path, char **args, char **env);
 int		exec_cmd(char **args, char **env);
 
 /*
 ** src/dir_utils.c
 */
-int		change_wd(char *path, char ***env);
 void	handle_cd(char **args, char ***env);
 
 /*
@@ -61,12 +58,27 @@ void	handle_echo(char **args, t_flags *flags);
 /*
 ** src/process_args.c
 */
-int		update_arg(char *ch_pos, char *ch2_pos, char **arg, char **env);
 char	**process_args(char *line, char **env);
 
+/*
+** src/parse_input.c
+*/
+void	parse_input(t_flags *flags, char ***env);
+void	parse_line(char *line, t_flags *flags, char ***env);
 
+/*
+** src/signals.c
+*/
 void    signal_handler_input(int signal);
 void    signal_handler(int signal);
+
+/*
+** src/signals.c
+*/
+int		get_line(int const fd, char **line);
+
+
 void	handle_error(char *cmd, int err_code);
+void	handle_exit(char ***args, char ***env);
 
 #endif

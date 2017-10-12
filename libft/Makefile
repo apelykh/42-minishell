@@ -11,7 +11,7 @@
 #******************************************************************************#
 
 NAME = libft.a
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -g -Wall -Werror -Wextra
 CC = gcc $(FLAGS)
 INCLUDE_DIR = includes/
 SRC_DIR = src/

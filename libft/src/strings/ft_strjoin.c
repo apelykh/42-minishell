@@ -23,7 +23,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	res = ft_strnew(sizeof(*s1) * (len + ft_strlen(s2)));
 	if (!res)
 		return (NULL);
-	ft_strcat(res, s1);
+	ft_strcpy(res, s1);
 	ft_strcat(res + len, s2);
 	return (res);
 }

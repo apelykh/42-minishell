@@ -16,13 +16,15 @@ NAME = minishell
 LIB_DIR = libft/
 LIB = $(addprefix $(LIB_DIR), libft.a)
 SRC_DIR = src/
-SRC_FILES = main.c \
-			env_utils.c \
+SRC_FILES = env_utils.c \
 			dir_utils.c \
 			exec_utils.c \
 			echo_utils.c \
 			process_args.c \
+			parse_input.c \
+			get_line.c \
 			signals.c \
+			main.c \
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ = $(SRC:.c=.o)

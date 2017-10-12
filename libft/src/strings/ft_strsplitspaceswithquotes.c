@@ -75,7 +75,7 @@ char		**ft_strsplitspaceswithquotes(char *str)
 		count_words(&str);
 		split[word] = ft_strnew(str - ptr - count_quotes(ptr, str - ptr));
 		ft_strncpywoutquotes(split[word], ptr, str - ptr);
-		split[word++][str - ptr] = '\0';
+		split[word++][str - ptr - count_quotes(ptr, str - ptr)] = '\0';
 		skip_spaces(&str);
 	}
 	return (split);

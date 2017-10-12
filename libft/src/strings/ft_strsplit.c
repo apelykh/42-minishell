@@ -38,7 +38,7 @@ char		**ft_strsplit(char const *s, char c)
 	if (!s)
 		return (NULL);
 	num_words = count_words(s, c);
-	res = (char **)malloc(sizeof(char *) * num_words + 1);
+	res = ft_arrnew(num_words);
 	if (!res)
 		return (NULL);
 	i = 0;
@@ -53,6 +53,5 @@ char		**ft_strsplit(char const *s, char c)
 		s += j;
 		i++;
 	}
-	res[i] = 0;
 	return (res);
 }
