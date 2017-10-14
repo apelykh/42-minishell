@@ -17,11 +17,12 @@
 char	*g_line;
 pid_t	g_child_pid;
 
-void	handle_exit(char ***args, char ***env)
+void	handle_exit(char ***args, char ***env, char ***to_free)
 {
 	ft_strdel(&g_line);
 	ft_arrfree(args);
 	ft_arrfree(env);
+	ft_arrfree(to_free);
 	exit(0);
 }
 

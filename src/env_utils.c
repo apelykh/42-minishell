@@ -35,23 +35,6 @@ char	*ft_getenv(char *var, char **env)
 	return (NULL);
 }
 
-void	handle_setenv(char **args, char ***env)
-{
-	int		args_len;
-
-	args_len = ft_arrlen(args);
-	if (args_len < 2 || args_len > 3)
-	{
-		handle_error("setenv", INVAL_ARGS_NUM);
-		ft_putendl("usage: setenv var_name [var_value]");
-		return ;
-	}
-	if (args_len == 3)
-		ft_setenv(env, args[1], args[2], 1);
-	else
-		ft_setenv(env, args[1], "", 1);
-}
-
 char	**ft_setenv(char ***env, char *var, char *value, int overwrite)
 {
 	char	**new_env;
@@ -78,6 +61,23 @@ char	**ft_setenv(char ***env, char *var, char *value, int overwrite)
 	return (*env);
 }
 
+void	handle_setenv(char **args, char ***env)
+{
+	int		args_len;
+
+	args_len = ft_arrlen(args);
+	if (args_len < 2 || args_len > 3)
+	{
+		handle_error("setenv", INVAL_ARGS_NUM);
+		ft_putendl("usage: setenv var_name [var_value]");
+		return ;
+	}
+	if (args_len == 3)
+		ft_setenv(env, args[1], args[2], 1);
+	else
+		ft_setenv(env, args[1], "", 1);
+}
+
 char	**ft_unsetenv(char **args, char ***env)
 {
 	char	**new_env;
@@ -86,7 +86,7 @@ char	**ft_unsetenv(char **args, char ***env)
 	if (ft_arrlen(args) != 2)
 	{
 		handle_error("unsetenv", INVAL_ARGS_NUM);
-		ft_putendl("usage: setenv var_name [var_value]");
+		ft_putendl("usage: unsetenv var_name");
 		return (NULL);
 	}
 	if (!(var_val = ft_getenv(args[1], *env)))

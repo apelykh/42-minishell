@@ -21,19 +21,21 @@ static int		check_exec(char *exec_path)
 {
 	struct stat	exec_stat;
 
-	if (!access(exec_path, X_OK) && !lstat(exec_path, &exec_stat))
+	if (!lstat(exec_path, &exec_stat))
 	{
-		if ((exec_stat.st_mode & S_IXUSR) &&
-			(exec_stat.st_mode & S_IXGRP) &&
-			(exec_stat.st_mode & S_IXOTH))
-			return (1);
-		else
+		if (!(exec_stat.st_mode & S_IXUSR) ||
+			!(exec_stat.st_mode & S_IXGRP) ||
+			!(exec_stat.st_mode & S_IXOTH))
 		{
 			handle_error(exec_path, NO_EXEC_PERM);
-			return (0);
+			return (-1);
 		}
+		if (!S_ISREG(exec_stat.st_mode))
+			return (0);
 	}
-	return (0);
+	if (access(exec_path, X_OK) == -1)
+		return (0);
+	return (1);
 }
 
 static int		run_child_process(char *exec_path, char **args, char **env)
@@ -41,7 +43,7 @@ static int		run_child_process(char *exec_path, char **args, char **env)
 	int			status;
 
 	status = check_exec(exec_path);
-	if (status)
+	if (status > 0)
 	{
 		g_child_pid = fork();
 		if (g_child_pid == 0)

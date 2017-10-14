@@ -69,7 +69,7 @@ static char	*process_arg(char *str, char **env)
 	return (res);
 }
 
-char	**process_args(char *line, char **env)
+char		**process_args(char *line, char **env)
 {
 	char	**args;
 	char	*res;

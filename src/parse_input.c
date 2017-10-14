@@ -15,14 +15,8 @@
 
 extern char	*g_line;
 
-static void	refresh_flags(t_flags *flags)
-{
-	flags->e = 0;
-	flags->E = 0;
-	flags->n = 0;
-}
-
-void		parse_line(char *line, t_flags *flags, char ***env)
+static void	parse_line(char *line, t_flags *flags, char ***env,
+						char ***to_free)
 {
 	char **args;
 
@@ -39,13 +33,20 @@ void		parse_line(char *line, t_flags *flags, char ***env)
 		else if (ft_strstr(line, "unsetenv ") == line)
 			ft_unsetenv(args, env);
 		else if (!ft_strcmp(line, "exit"))
-			handle_exit(&args, env);
+			handle_exit(&args, env, to_free);
 		else if (!ft_strcmp(line, "echo") || ft_strstr(line, "echo ") == line)
 			handle_echo(args, flags);
 		else if (exec_cmd(args, *env) == 0)
 			handle_error(line, CMD_NOT_FOUND);
 	}
 	ft_arrfree(&args);
+}
+
+static void	refresh_flags(t_flags *flags)
+{
+	flags->escape_on = 0;
+	flags->escape_off = 0;
+	flags->no_feed = 0;
 }
 
 void		parse_input(t_flags *flags, char ***env)
@@ -61,7 +62,7 @@ void		parse_input(t_flags *flags, char ***env)
 		{
 			refresh_flags(flags);
 			if (ft_strlen(split[i]) > 0)
-				parse_line(split[i], flags, env);
+				parse_line(split[i], flags, env, &split);
 			i++;
 		}
 		ft_arrfree(&split);

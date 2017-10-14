@@ -42,18 +42,7 @@ static void	ft_echostr(char *str, t_flags *flags)
 	i = 0;
 	while (str[i])
 	{
-		// if (str[i] == '\\' && str[i + 1] && flags->e)
-		// {
-		// 	ch = choose_sym(str[i + 1]);
-		// 	ft_putchar(ch);
-		// 	i += 2;
-		// }
-		// else
-		// {
-		// 	ft_putchar(str[i]);
-		// 	i++;
-		// }
-		if (str[i] == '\\' && str[i + 1] && flags->e)
+		if (str[i] == '\\' && str[i + 1] && flags->escape_on)
 		{
 			sym = choose_sym(str[i + 1]);
 			i++;
@@ -76,9 +65,9 @@ static int	process_flag(char *arg, t_flags *flags)
 	i = 0;
 	while (arg[++i])
 	{
-		arg[i] == 'e' ? flags->e = 1 : 0;
-		arg[i] == 'E' ? flags->E = 1 : 0;
-		arg[i] == 'n' ? flags->n = 1 : 0;
+		flags->escape_on = (arg[i] == 'e');
+		flags->escape_off = (arg[i] == 'E');
+		flags->no_feed = (arg[i] == 'n');
 	}
 	return (1);
 }
@@ -119,6 +108,6 @@ void		handle_echo(char **args, t_flags *flags)
 			ft_putchar(' ');
 		first_arg++;
 	}
-	if (!flags->n)
+	if (!flags->no_feed)
 		ft_putchar('\n');
 }

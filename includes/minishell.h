@@ -27,58 +27,60 @@
 
 typedef struct	s_flags
 {
-	int e;
-	int E;
-	int n;
+	int			escape_on;
+	int			escape_off;
+	int			no_feed;
 }				t_flags;
 
 /*
 ** src/env_utils.c
 */
-void	handle_setenv(char **args, char ***env);
-char	*ft_getenv(char *var, char **env);
-char	**ft_setenv(char ***env, char *var, char *value, int overwrite);
-char	**ft_unsetenv(char **args, char ***env);
+void			handle_setenv(char **args, char ***env);
+char			*ft_getenv(char *var, char **env);
+char			**ft_setenv(char ***env, char *var, char *value,
+							int overwrite);
+char			**ft_unsetenv(char **args, char ***env);
 
 /*
 ** src/exec_utils.c
 */
-int		exec_cmd(char **args, char **env);
+int				exec_cmd(char **args, char **env);
 
 /*
 ** src/dir_utils.c
 */
-void	handle_cd(char **args, char ***env);
+void			handle_cd(char **args, char ***env);
 
 /*
 ** src/echo_utils.c
 */
-void	handle_echo(char **args, t_flags *flags);
+void			handle_echo(char **args, t_flags *flags);
 
 /*
 ** src/process_args.c
 */
-char	**process_args(char *line, char **env);
+char			**process_args(char *line, char **env);
 
 /*
 ** src/parse_input.c
 */
-void	parse_input(t_flags *flags, char ***env);
-void	parse_line(char *line, t_flags *flags, char ***env);
+void			parse_input(t_flags *flags, char ***env);
 
 /*
 ** src/signals.c
 */
-void    signal_handler_input(int signal);
-void    signal_handler(int signal);
+void			signal_handler_input(int signal);
+void			signal_handler(int signal);
 
 /*
-** src/signals.c
+** src/get_line.c
 */
-int		get_line(int const fd, char **line);
+int				get_line(int const fd, char **line);
 
-
-void	handle_error(char *cmd, int err_code);
-void	handle_exit(char ***args, char ***env);
+/*
+** src/main.c
+*/
+void			handle_error(char *cmd, int err_code);
+void			handle_exit(char ***args, char ***env, char ***to_free);
 
 #endif
