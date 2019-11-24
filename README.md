@@ -24,5 +24,5 @@ The objective of this project is to create the simplest shell.
 
 ---
 ### Bonus functionality implemented:
-- Management of signals: 'Ctrl-C', 'Ctrl+\' (the use of global variables is allowed for this bonus);
+- Management of signals: 'Ctrl-C', 'Ctrl+\\' (the use of global variables is allowed for this bonus);
 - the separation of commands with ";";
